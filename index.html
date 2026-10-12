@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bambu Decor - Sản Phẩm In 3D Cao Cấp</title>
   
-  <!-- Font chữ hiện đại, rõ ràng, dễ đọc cho mọi lứa tuổi -->
+  <!-- Font chữ hiện đại, chữ to, rõ ràng dễ đọc -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Thư viện xem 3D của Google -->
+  <!-- Thư viện xem 3D siêu nhẹ của Google -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
   <style>
-    /* --- CSS RESET & PHONG CÁCH ELEGANT --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -26,40 +25,39 @@
       background-color: #f8f9fa;
       color: #1a1d20;
       line-height: 1.6;
-      padding: 20px 12px;
+      padding: 24px 12px;
     }
 
-    /* Container chính tối ưu cả Mobile & Web Desktop */
     .catalog-container {
-      max-width: 1000px;
+      max-width: 960px;
       margin: 0 auto;
     }
 
     .header-title {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .header-title h1 {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 800;
       color: #0f172a;
+      letter-spacing: -0.5px;
     }
     .header-title p {
-      font-size: 16px;
+      font-size: 17px;
       color: #64748b;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     /* Thẻ sản phẩm Modern & Elegant */
     .product-card {
       background: #ffffff;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
       border: 1px solid #e2e8f0;
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 0;
     }
 
     @media (min-width: 768px) {
@@ -68,7 +66,7 @@
       }
     }
 
-    /* Khung Media (Ảnh, Video, 3D) */
+    /* Khung hiển thị Media */
     .media-section {
       background-color: #f1f5f9;
       position: relative;
@@ -99,6 +97,7 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      background-color: #f8fafc;
     }
 
     .media-viewport img {
@@ -119,7 +118,7 @@
       --poster-color: transparent;
     }
 
-    /* Thanh chọn Media (Photo / Video / 3D) */
+    /* Thanh bấm chuyển đổi Ảnh / Video / 3D */
     .media-tabs {
       display: flex;
       gap: 8px;
@@ -133,10 +132,10 @@
       border: 1px solid #cbd5e1;
       background: #ffffff;
       color: #334155;
-      padding: 8px 14px;
-      border-radius: 10px;
+      padding: 10px 16px;
+      border-radius: 12px;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 15px;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
@@ -150,7 +149,7 @@
       border-color: #0f172a;
     }
 
-    /* Chi tiết sản phẩm - Chữ to, rõ ràng */
+    /* Chi tiết sản phẩm - Chữ to & Rõ ràng */
     .details-section {
       padding: 28px 24px;
       display: flex;
@@ -166,7 +165,7 @@
     }
 
     .price-tag {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 800;
       color: #2563eb;
       margin: 10px 0 16px 0;
@@ -179,11 +178,10 @@
       line-height: 1.6;
     }
 
-    /* Danh sách thông số */
     .specs-list {
       background: #f8fafc;
-      border-radius: 12px;
-      padding: 16px;
+      border-radius: 14px;
+      padding: 18px;
       margin-bottom: 24px;
       border: 1px solid #f1f5f9;
     }
@@ -191,7 +189,7 @@
     .spec-item {
       font-size: 15px;
       color: #334155;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       display: flex;
       justify-content: space-between;
     }
@@ -202,7 +200,7 @@
       color: #0f172a;
     }
 
-    /* Nút bấm mua hàng Zalo to rõ */
+    /* Nút Zalo Đặt Hàng */
     .action-group {
       display: flex;
       gap: 12px;
@@ -214,11 +212,11 @@
       color: #ffffff;
       text-decoration: none;
       text-align: center;
-      padding: 14px 20px;
+      padding: 16px 20px;
       border-radius: 12px;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(0, 104, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(0, 104, 255, 0.25);
       transition: background 0.2s;
     }
 
@@ -231,23 +229,21 @@
 
   <div class="catalog-container">
     <div class="header-title">
-      <h1>BAMBU LAB DECOR</h1>
-      <p>Sản phẩm in 3D hoàn thiện cao cấp & Quà tặng tinh tế</p>
+      <h1>BAMBU LAB SHOP</h1>
+      <p>Sản phẩm in 3D hoàn thiện & Đồ decor độc đáo</p>
     </div>
 
-    <!-- THẺ SẢN PHẨM -->
+    <!-- CARD SẢN PHẨM -->
     <div class="product-card">
       
-      <!-- KHU VỰC HÌNH ẢNH / VIDEO / 3D -->
+      <!-- KHU VỰC MEDIA -->
       <div class="media-section">
-        <div class="badge-bambu">✨ In từ máy Bambu Lab X1C</div>
+        <div class="badge-bambu">✨ In từ Bambu Lab X1C</div>
 
         <div class="media-viewport" id="viewport">
-          <!-- Mặc định hiện Ảnh -->
-          <img src="./images/den-ngu-tulip.jpg" alt="Đèn ngủ Tulip 3D" id="img-view" />
+          <img src="./images/Gemini_Generated_Image_2refk82refk82ref.jpeg" alt="Đèn ngủ Tulip 3D" id="img-view" />
         </div>
 
-        <!-- Các nút bấm chuyển chế độ xem -->
         <div class="media-tabs">
           <button class="tab-btn active" onclick="showPhoto()">🖼️ Ảnh thật</button>
           <button class="tab-btn" onclick="showVideo()">▶️ Video</button>
@@ -255,14 +251,14 @@
         </div>
       </div>
 
-      <!-- KHU VỰC THÔNG TIN SẢN PHẨM -->
+      <!-- THÔNG TIN SẢN PHẨM -->
       <div class="details-section">
         <div>
           <h2 class="product-title">Đèn Ngủ Tulip Đa Sắc</h2>
           <div class="price-tag">350.000 đ</div>
 
           <p class="description">
-            Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn nổi mịn màng, khuếch tán ánh sáng vàng ấm áp tạo cảm giác dễ chịu cho phòng ngủ.
+            Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.
           </p>
 
           <div class="specs-list">
@@ -282,9 +278,9 @@
         </div>
 
         <div class="action-group">
-          <!-- Thay SĐT Zalo của bạn vào đây -->
-          <a href="https://zalo.me/0900000000" target="_blank" class="btn-zalo">
-            💬 Đặt Hàng Nhanh Qua Zalo
+          <!-- Liên kết Zalo trực tiếp tới số 0934346270 -->
+          <a href="https://zalo.me/0934346270" target="_blank" class="btn-zalo">
+            💬 Đặt Hàng Qua Zalo (0934.346.270)
           </a>
         </div>
       </div>
@@ -292,7 +288,6 @@
     </div>
   </div>
 
-  <!-- JAVASCRIPT ĐIỀU KHIỂN CHUYỂN TAB MEDIA -->
   <script>
     const viewport = document.getElementById('viewport');
     const buttons = document.querySelectorAll('.tab-btn');
@@ -306,12 +301,11 @@
 
     function showPhoto() {
       setActiveBtn(0);
-      viewport.innerHTML = `<img src="./images/den-ngu-tulip.jpg" alt="Đèn ngủ Tulip 3D" />`;
+      viewport.innerHTML = `<img src="./images/Gemini_Generated_Image_2refk82refk82ref.jpeg" alt="Đèn ngủ Tulip 3D" />`;
     }
 
     function showVideo() {
       setActiveBtn(1);
-      // Thay YOUTUBE_ID bằng ID video thật của bạn (ví dụ: dQw4w9WgXcQ)
       viewport.innerHTML = `
         <iframe 
           src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
@@ -324,7 +318,7 @@
       setActiveBtn(2);
       viewport.innerHTML = `
         <model-viewer 
-          src="./models/sample_planter_3d.glb" 
+          src="./models/Duck.glb" 
           alt="Mô hình 3D" 
           auto-rotate 
           camera-controls 
