@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Song Ngư Quán — Tạo VietQR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/qr.css" />
+</head>
+<body>
+  <header class="qr-hero">
+    <div class="qr-wrap">
+      <h1>Tạo mã QR chuyển khoản</h1>
+      <p>Nhập số tiền, tên khách & sản phẩm — nội dung CK gộp tự động.</p>
+    </div>
+  </header>
+
+  <main class="qr-wrap">
+    <section class="qr-card" aria-labelledby="qr-form-title">
+      <h2 id="qr-form-title" class="visually-hidden">Thông tin chuyển khoản</h2>
+
+      <div class="qr-bank">
+        Techcombank · STK <strong>990934346270</strong>
+        <strong>DONG QUOC TRANH</strong>
+      </div>
+
+      <form id="qr-form" novalidate>
+        <div class="qr-field">
+          <label for="amount">Số tiền (VND)</label>
+          <input
+            id="amount"
+            name="amount"
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="Ví dụ: 350000"
+            required
+          />
+          <p class="hint" id="amount-display"></p>
+        </div>
+
+        <fieldset class="qr-fieldset">
+          <legend>Nội dung chuyển khoản (gộp tự động)</legend>
+          <div class="qr-field">
+            <label for="customerName">Tên khách hàng</label>
+            <input
+              id="customerName"
+              name="customerName"
+              type="text"
+              autocomplete="name"
+              placeholder="Ví dụ: Nguyễn Văn A"
+              required
+            />
+          </div>
+          <div class="qr-field">
+            <label for="transferDate">Ngày tạo CK</label>
+            <input id="transferDate" name="transferDate" type="text" readonly tabindex="-1" />
+            <p class="hint">Tự lấy ngày hôm nay trên máy bạn.</p>
+          </div>
+          <div class="qr-field">
+            <label for="product">Sản phẩm</label>
+            <input
+              id="product"
+              name="product"
+              type="text"
+              autocomplete="off"
+              placeholder="Ví dụ: Lồng sen đôi + chậu"
+              required
+            />
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="qr-preview" id="qr-preview" aria-live="polite">
+        <div class="placeholder" id="qr-placeholder" aria-hidden="true"></div>
+        <img id="qr-image" alt="Mã VietQR chuyển khoản" hidden />
+      </div>
+
+      <dl class="qr-summary" id="qr-summary" hidden>
+        <dt>Số tiền</dt>
+        <dd id="sum-amount">—</dd>
+        <dt>Nội dung CK</dt>
+        <dd id="sum-addInfo">—</dd>
+      </dl>
+
+      <div class="qr-actions qr-actions--duo">
+        <button type="button" class="qr-btn qr-btn-primary" id="btn-zalo" disabled>
+          Gửi qua Zalo
+        </button>
+        <button type="button" class="qr-btn qr-btn-secondary" id="btn-download" disabled>
+          Tải ảnh QR
+        </button>
+      </div>
+    </section>
+
+    <p class="qr-foot">
+      QR tạo qua <a href="https://vietqr.io" target="_blank" rel="noopener">VietQR</a> — tiền vào STK, không qua cổng thanh toán.
+      <br />
+      <a href="../index.html">← Về catalog</a>
+    </p>
+  </main>
+
+  <div class="qr-toast" id="toast" role="status" aria-live="polite"></div>
+
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+
+  <script>
+    (function () {
+      var BANK_ID = '970407';
+      var ACCOUNT_NO = '990934346270';
+      var ACCOUNT_NAME = 'DONG QUOC TRANH';
+      var TEMPLATE = 'compact2';
+
+      var amountInput = document.getElementById('amount');
+      var customerInput = document.getElementById('customerName');
+      var productInput = document.getElementById('product');
+      var transferDateInput = document.getElementById('transferDate');
+      var amountDisplay = document.getElementById('amount-display');
+      var qrImage = document.getElementById('qr-image');
+      var qrPlaceholder = document.getElementById('qr-placeholder');
+      var qrSummary = document.getElementById('qr-summary');
+      var sumAmount = document.getElementById('sum-amount');
+      var sumAddInfo = document.getElementById('sum-addInfo');
+      var btnZalo = document.getElementById('btn-zalo');
+      var btnDownload = document.getElementById('btn-download');
+      var toast = document.getElementById('toast');
+
+      var todayMeta = (function () {
+        var d = new Date();
+        var dd = String(d.getDate()).padStart(2, '0');
+        var mm = String(d.getMonth() + 1).padStart(2, '0');
+        var yyyy = d.getFullYear();
+        return {
+          display: dd + '/' + mm + '/' + yyyy,
+          compact: dd + mm + String(yyyy).slice(-2),
+        };
+      })();
+      transferDateInput.value = todayMeta.display;
+
+      var state = {
+        amount: 0,
+        addInfo: '',
+        qrUrl: '',
+        blob: null,
+      };
+
+      function parseAmount(raw) {
+        var digits = String(raw || '').replace(/\D/g, '');
+        if (!digits) return 0;
+        var n = parseInt(digits, 10);
+        return isFinite(n) && n > 0 ? n : 0;
+      }
+
+      function formatVnd(n) {
+        return new Intl.NumberFormat('vi-VN').format(n) + ' ₫';
+      }
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('is-visible');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function () {
+          toast.classList.remove('is-visible');
+        }, 2800);
+      }
+
+      function buildQrUrl(amount, addInfo) {
+        var base =
+          'https://img.vietqr.io/image/' +
+          BANK_ID +
+          '-' +
+          ACCOUNT_NO +
+          '-' +
+          TEMPLATE +
+          '.jpg';
+        var params = new URLSearchParams();
+        params.set('amount', String(amount));
+        params.set('addInfo', addInfo);
+        params.set('accountName', ACCOUNT_NAME);
+        return base + '?' + params.toString();
+      }
+
+      function normalizePart(s) {
+        return String(s || '')
+          .trim()
+          .replace(/\s+/g, ' ')
+          .replace(/[^\w\sÀ-ỹ.-]/gi, '');
+      }
+
+      function buildAddInfo(customer, product) {
+        var parts = [normalizePart(customer), todayMeta.compact, normalizePart(product)].filter(
+          function (p) {
+            return p.length > 0;
+          }
+        );
+        return parts.join(' ').slice(0, 50);
+      }
+
+      function buildShareText() {
+        return (
+          'Song Ngư Quán — chuyển khoản\n' +
+          'Số tiền: ' +
+          formatVnd(state.amount) +
+          '\nNội dung CK: ' +
+          state.addInfo +
+          '\nTK: ' +
+          ACCOUNT_NO +
+          ' (' +
+          ACCOUNT_NAME +
+          ') · Techcombank'
+        );
+      }
+
+      function setButtonsEnabled(ok) {
+        btnZalo.disabled = !ok;
+        btnDownload.disabled = !ok;
+      }
+
+      function updateFromInputs() {
+        var amount = parseAmount(amountInput.value);
+        var addInfo = buildAddInfo(customerInput.value, productInput.value);
+
+        if (amount > 0) {
+          amountDisplay.textContent = formatVnd(amount);
+        } else {
+          amountDisplay.textContent = '';
+        }
+
+        var hasCustomer = normalizePart(customerInput.value).length > 0;
+        var hasProduct = normalizePart(productInput.value).length > 0;
+        var ok = amount > 0 && hasCustomer && hasProduct;
+        setButtonsEnabled(ok);
+
+        if (!ok) {
+          state.amount = 0;
+          state.addInfo = '';
+          state.qrUrl = '';
+          state.blob = null;
+          qrImage.hidden = true;
+          qrImage.removeAttribute('src');
+          qrPlaceholder.hidden = false;
+          qrSummary.hidden = true;
+          return;
+        }
+
+        state.amount = amount;
+        state.addInfo = addInfo;
+        state.qrUrl = buildQrUrl(amount, addInfo);
+        state.blob = null;
+
+        qrPlaceholder.hidden = true;
+        qrImage.hidden = false;
+        qrImage.src = state.qrUrl;
+        qrSummary.hidden = false;
+        sumAmount.textContent = formatVnd(amount);
+        sumAddInfo.textContent = addInfo;
+      }
+
+      function prefetchBlob() {
+        if (!state.qrUrl) return Promise.reject(new Error('no qr'));
+        if (state.blob) return Promise.resolve(state.blob);
+        return fetch(state.qrUrl, { mode: 'cors' })
+          .then(function (res) {
+            if (!res.ok) throw new Error('fetch qr');
+            return res.blob();
+          })
+          .then(function (blob) {
+            state.blob = blob;
+            return blob;
+          });
+      }
+
+      function blobToFile(blob) {
+        var name = 'SNQ-VietQR-' + state.addInfo.replace(/[^\w-]+/g, '_') + '.jpg';
+        return new File([blob], name, { type: blob.type || 'image/jpeg' });
+      }
+
+      function shareToZalo() {
+        if (!state.qrUrl) return;
+        var text = buildShareText();
+
+        prefetchBlob()
+          .then(function (blob) {
+            var file = blobToFile(blob);
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+              return navigator.share({
+                title: 'Chuyển khoản Song Ngư Quán',
+                text: text,
+                files: [file],
+              });
+            }
+            if (navigator.clipboard && window.ClipboardItem) {
+              return navigator.clipboard
+                .write([new ClipboardItem({ [blob.type || 'image/jpeg']: blob })])
+                .then(function () {
+                  showToast('Đã copy ảnh QR — mở Zalo, dán (Ctrl+V) vào chat khách');
+                });
+            }
+            triggerDownload(blob);
+            showToast('Đã tải ảnh — gửi file vào Zalo cho khách');
+          })
+          .catch(function () {
+            showToast('Không chia sẻ được — thử Tải ảnh QR');
+          });
+      }
+
+      function triggerDownload(blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = blobToFile(blob).name;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function downloadQr() {
+        prefetchBlob()
+          .then(triggerDownload)
+          .catch(function () {
+            if (state.qrUrl) {
+              window.open(state.qrUrl, '_blank', 'noopener');
+              showToast('Đang mở ảnh QR — giữ để lưu (mobile)');
+            }
+          });
+      }
+
+      amountInput.addEventListener('input', updateFromInputs);
+      customerInput.addEventListener('input', updateFromInputs);
+      productInput.addEventListener('input', updateFromInputs);
+
+      var params = new URLSearchParams(location.search);
+      if (params.get('amount')) amountInput.value = params.get('amount');
+      if (params.get('customer')) customerInput.value = params.get('customer');
+      if (params.get('product')) productInput.value = params.get('product');
+      updateFromInputs();
+
+      btnZalo.addEventListener('click', shareToZalo);
+      btnDownload.addEventListener('click', downloadQr);
+    })();
+  </script>
+</body>
+</html>

@@ -3,328 +3,84 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bambu Decor - Sản Phẩm In 3D Cao Cấp</title>
-  
-  <!-- Font chữ hiện đại, chữ to, rõ ràng dễ đọc -->
+  <script>
+    window.__CATALOG_ASSET_BASE__ = (function () {
+      var host = location.hostname;
+      if (/\.github\.io$/i.test(host)) {
+        var parts = location.pathname.split('/').filter(Boolean);
+        if (parts[0]) return '/' + parts[0] + '/';
+      }
+      var path = location.pathname;
+      if (/\.html?$/i.test(path)) return path.slice(0, path.lastIndexOf('/') + 1);
+      if (path.endsWith('/')) return path;
+      if (/^\/[^/]+$/.test(path)) return path + '/';
+      return '/';
+    })();
+  </script>
+  <title>Song Ngư Quán - Sản phẩm 3D</title>
+  <style>
+    body.theme-b { margin: 0; font-family: system-ui, sans-serif; background: #d8d2c6; }
+    .site-intro-band { background: #5f6b49; color: #fff; padding: 16px 0 14px; }
+    .site-bar { background: #5f6b49; }
+    .catalog-loading { text-align: center; padding: 2rem; color: #6b6560; }
+  </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Thư viện xem 3D siêu nhẹ của Google -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #f8f9fa;
-      color: #1a1d20;
-      line-height: 1.6;
-      padding: 24px 12px;
-    }
-
-    .catalog-container {
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .header-title {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-    .header-title h1 {
-      font-size: 30px;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.5px;
-    }
-    .header-title p {
-      font-size: 17px;
-      color: #64748b;
-      margin-top: 6px;
-    }
-
-    /* Thẻ sản phẩm Modern & Elegant */
-    .product-card {
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-      border: 1px solid #e2e8f0;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-
-    @media (min-width: 768px) {
-      .product-card {
-        grid-template-columns: 1.1fr 1fr;
-      }
-    }
-
-    /* Khung hiển thị Media */
-    .media-section {
-      background-color: #f1f5f9;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 380px;
-    }
-
-    .badge-bambu {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: rgba(15, 23, 42, 0.85);
-      color: #ffffff;
-      padding: 6px 14px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      backdrop-filter: blur(8px);
-      z-index: 10;
-    }
-
-    .media-viewport {
-      width: 100%;
-      height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background-color: #f8fafc;
-    }
-
-    .media-viewport img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .media-viewport iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    model-viewer {
-      width: 100%;
-      height: 100%;
-      --poster-color: transparent;
-    }
-
-    /* Thanh bấm chuyển đổi Ảnh / Video / 3D */
-    .media-tabs {
-      display: flex;
-      gap: 8px;
-      padding: 12px;
-      background: #ffffff;
-      border-top: 1px solid #e2e8f0;
-      justify-content: center;
-    }
-
-    .tab-btn {
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
-      color: #334155;
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tab-btn.active, .tab-btn:hover {
-      background: #0f172a;
-      color: #ffffff;
-      border-color: #0f172a;
-    }
-
-    /* Chi tiết sản phẩm - Chữ to & Rõ ràng */
-    .details-section {
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .product-title {
-      font-size: 26px;
-      font-weight: 800;
-      color: #0f172a;
-      line-height: 1.3;
-    }
-
-    .price-tag {
-      font-size: 26px;
-      font-weight: 800;
-      color: #2563eb;
-      margin: 10px 0 16px 0;
-    }
-
-    .description {
-      font-size: 16px;
-      color: #475569;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    .specs-list {
-      background: #f8fafc;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 24px;
-      border: 1px solid #f1f5f9;
-    }
-
-    .spec-item {
-      font-size: 15px;
-      color: #334155;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .spec-item:last-child {
-      margin-bottom: 0;
-    }
-    .spec-item strong {
-      color: #0f172a;
-    }
-
-    /* Nút Zalo Đặt Hàng */
-    .action-group {
-      display: flex;
-      gap: 12px;
-      flex-direction: column;
-    }
-
-    .btn-zalo {
-      background: #0068ff;
-      color: #ffffff;
-      text-decoration: none;
-      text-align: center;
-      padding: 16px 20px;
-      border-radius: 12px;
-      font-size: 18px;
-      font-weight: 700;
-      box-shadow: 0 4px 14px rgba(0, 104, 255, 0.25);
-      transition: background 0.2s;
-    }
-
-    .btn-zalo:hover {
-      background: #0052cc;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/catalog.css" id="catalog-css" />
+  <script>
+    (function () {
+      var base = window.__CATALOG_ASSET_BASE__;
+      var css = document.getElementById('catalog-css');
+      css.href = base + 'assets/css/catalog.css?v=15';
+    })();
+  </script>
 </head>
-<body>
+<body class="theme-b">
 
-  <div class="catalog-container">
-    <div class="header-title">
-      <h1>BAMBU LAB SHOP</h1>
-      <p>Sản phẩm in 3D hoàn thiện & Đồ decor độc đáo</p>
+  <section class="site-intro-band" id="site-intro">
+    <div class="catalog-container">
+      <h1 id="site-title">…</h1>
+      <p id="site-subtitle">Đang tải danh mục…</p>
     </div>
+  </section>
 
-    <!-- CARD SẢN PHẨM -->
-    <div class="product-card">
-      
-      <!-- KHU VỰC MEDIA -->
-      <div class="media-section">
-        <div class="badge-bambu">✨ In từ Bambu Lab X1C</div>
-
-        <div class="media-viewport" id="viewport">
-          <img src="./images/Gemini_Generated_Image_2refk82refk82ref.jpeg" alt="Đèn ngủ Tulip 3D" id="img-view" />
-        </div>
-
-        <div class="media-tabs">
-          <button class="tab-btn active" onclick="showPhoto()">🖼️ Ảnh thật</button>
-          <button class="tab-btn" onclick="showVideo()">▶️ Video</button>
-          <button class="tab-btn" onclick="show3D()">📦 Xem 3D (Xoay)</button>
-        </div>
-      </div>
-
-      <!-- THÔNG TIN SẢN PHẨM -->
-      <div class="details-section">
-        <div>
-          <h2 class="product-title">Đèn Ngủ Tulip Đa Sắc</h2>
-          <div class="price-tag">350.000 đ</div>
-
-          <p class="description">
-            Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.
-          </p>
-
-          <div class="specs-list">
-            <div class="spec-item">
-              <span>Kích thước:</span>
-              <strong>15 x 12 x 20 cm</strong>
-            </div>
-            <div class="spec-item">
-              <span>Chất liệu:</span>
-              <strong>Nhựa PLA Nguyên Sinh</strong>
-            </div>
-            <div class="spec-item">
-              <span>Nguồn điện:</span>
-              <strong>Cổng USB 5V (Tiết kiệm điện)</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="action-group">
-          <!-- Liên kết Zalo trực tiếp tới số 0934346270 -->
-          <a href="https://zalo.me/0934346270" target="_blank" class="btn-zalo">
-            💬 Đặt Hàng Qua Zalo (0934.346.270)
-          </a>
-        </div>
-      </div>
-
+  <header class="site-bar" id="site-bar">
+    <div class="catalog-container site-toolbar">
+      <nav class="category-nav" aria-label="Danh mục sản phẩm">
+        <div class="category-nav-inner" id="category-nav-inner"></div>
+      </nav>
     </div>
+  </header>
+
+  <div class="catalog-container catalog-main">
+    <main id="catalog-root">
+      <p class="catalog-loading">Đang tải sản phẩm…</p>
+    </main>
   </div>
 
+  <noscript>
+    <p style="text-align:center;padding:2rem">Trang cần bật JavaScript để hiển thị danh mục.</p>
+  </noscript>
+
   <script>
-    const viewport = document.getElementById('viewport');
-    const buttons = document.querySelectorAll('.tab-btn');
-
-    function setActiveBtn(index) {
-      buttons.forEach((btn, i) => {
-        if (i === index) btn.classList.add('active');
-        else btn.classList.remove('active');
-      });
-    }
-
-    function showPhoto() {
-      setActiveBtn(0);
-      viewport.innerHTML = `<img src="./images/Gemini_Generated_Image_2refk82refk82ref.jpeg" alt="Đèn ngủ Tulip 3D" />`;
-    }
-
-    function showVideo() {
-      setActiveBtn(1);
-      viewport.innerHTML = `
-        <iframe 
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" 
-          allow="autoplay; encrypted-media" 
-          allowfullscreen>
-        </iframe>`;
-    }
-
-    function show3D() {
-      setActiveBtn(2);
-      viewport.innerHTML = `
-        <model-viewer 
-          src="./models/Duck.glb" 
-          alt="Mô hình 3D" 
-          auto-rotate 
-          camera-controls 
-          shadow-intensity="1">
-        </model-viewer>`;
-    }
+    (function () {
+      var base = window.__CATALOG_ASSET_BASE__;
+      var s = document.createElement('script');
+      s.src = base + 'assets/js/catalog.js?v=14';
+      s.defer = true;
+      s.onerror = function () {
+        var root = document.getElementById('catalog-root');
+        if (root) {
+          root.innerHTML =
+            '<div class="catalog-error"><strong>Không tải được catalog.js</strong><p>URL: ' +
+            s.src +
+            '</p><p>Kiểm tra GitHub Pages đã deploy file assets/js/catalog.js</p></div>';
+        }
+      };
+      document.body.appendChild(s);
+    })();
   </script>
 </body>
 </html>

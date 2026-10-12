@@ -1,0 +1,258 @@
+{
+  "site": {
+    "title": "SONG NGƯ QUÁN",
+    "subtitle": "Sản phẩm in 3D hoàn thiện & Đồ decor độc đáo",
+    "contact": {
+      "zaloUrl": "https://zalo.me/0934346270",
+      "phoneDisplay": "0934.346.270",
+      "ctaLabel": "💬 Đặt Hàng Qua Zalo"
+    }
+  },
+  "categories": [
+    {
+      "id": "den-decor",
+      "name": "Đèn & Decor",
+      "description": "Đèn ngủ, trang trí phòng — hoàn thiện mịn, in từ máy Bambu Lab.",
+      "products": [
+        {
+          "id": "den-tulip-da-sac",
+          "title": "Đèn Ngủ Tulip Đa Sắc",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        },
+        {
+          "id": "demo-3",
+          "title": "3",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        },
+        {
+          "id": "demo-4",
+          "title": "4",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        },
+        {
+          "id": "demo-5",
+          "title": "5",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mau-thu",
+      "name": "Mẫu thử & Demo",
+      "description": "Sản phẩm mẫu để test media (ảnh, video, 3D). Thêm sản phẩm mới trong JSON — không cần sửa HTML.",
+      "products": [
+        {
+          "id": "demo-1",
+          "title": "1",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        },
+        {
+          "id": "demo-2",
+          "title": "2",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        }
+      ]
+    },
+    {
+      "id": "mau-thu-2",
+      "name": "Mẫu thử & Demo",
+      "description": "Sản phẩm mẫu để test media (ảnh, video, 3D). Thêm sản phẩm mới trong JSON — không cần sửa HTML.",
+      "products": [
+        {
+          "id": "demo-1",
+          "title": "1",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        },
+        {
+          "id": "demo-2",
+          "title": "2",
+          "price": 350000,
+          "priceDisplay": "350.000 đ",
+          "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
+          "media": {
+            "image": "images/Gemini_Generated_Image_2refk82refk82ref.jpeg",
+            "imageAlt": "Đèn ngủ Tulip 3D",
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Mô hình 3D đèn Tulip"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "meta": {
+            "sku": "BD-TULIP-001",
+            "tags": ["đèn ngủ", "decor", "PLA"]
+          }
+        }
+      ]
+    }
+  ]
+}

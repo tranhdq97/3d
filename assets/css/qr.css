@@ -1,0 +1,292 @@
+/* Song Ngư Quán — VietQR (nội bộ shop) */
+:root {
+  --b-ink: #5f6b49;
+  --b-cream: #d8d2c6;
+  --b-surface: #ffffff;
+  --b-text: #2f3328;
+  --b-muted: #6b7260;
+  --b-card-border: #cfc4b4;
+  --b-accent: #c4a47c;
+  --b-accent-deep: #8f7348;
+  --b-radius: 14px;
+  --shadow-card: 0 10px 28px rgba(47, 51, 40, 0.1);
+  --page-gutter: clamp(20px, 5.5vw, 28px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background: var(--b-cream);
+  color: var(--b-text);
+  line-height: 1.5;
+  min-height: 100dvh;
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
+}
+
+.qr-wrap {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+}
+
+.qr-hero {
+  background: var(--b-ink);
+  color: #fff;
+  padding: 22px 0 18px;
+  margin-bottom: 20px;
+}
+
+.qr-hero h1 {
+  font-size: clamp(20px, 4.5vw, 24px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.qr-hero p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-top: 6px;
+}
+
+.qr-card {
+  background: var(--b-surface);
+  border: 1px solid var(--b-card-border);
+  border-radius: var(--b-radius);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.qr-bank {
+  font-size: 13px;
+  color: var(--b-muted);
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--b-card-border);
+}
+
+.qr-bank strong {
+  display: block;
+  color: var(--b-text);
+  font-size: 15px;
+  margin-top: 2px;
+}
+
+.qr-field {
+  margin-bottom: 16px;
+}
+
+.qr-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--b-text);
+}
+
+.qr-field input,
+.qr-field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--b-card-border);
+  border-radius: 10px;
+  background: #faf9f7;
+  color: var(--b-text);
+}
+
+.qr-field input:focus,
+.qr-field textarea:focus {
+  outline: 2px solid rgba(95, 107, 73, 0.35);
+  outline-offset: 1px;
+  border-color: var(--b-ink);
+  background: #fff;
+}
+
+.qr-field .hint {
+  font-size: 12px;
+  color: var(--b-muted);
+  margin-top: 6px;
+}
+
+.qr-preview {
+  text-align: center;
+  padding: 8px 0 4px;
+}
+
+.qr-preview img {
+  max-width: 100%;
+  width: 280px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--b-card-border);
+  background: #fff;
+}
+
+.qr-preview .placeholder {
+  width: 280px;
+  max-width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  background: #f3f0eb;
+  border: 1px dashed var(--b-card-border);
+  border-radius: 8px;
+}
+
+.qr-fieldset {
+  border: none;
+  margin: 0 0 4px;
+  padding: 0;
+}
+
+.qr-fieldset legend {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--b-text);
+  margin-bottom: 12px;
+  padding: 0;
+}
+
+.qr-field input[readonly] {
+  background: #eeebe5;
+  color: var(--b-muted);
+  cursor: default;
+}
+
+.qr-actions--duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 380px) {
+  .qr-actions--duo {
+    grid-template-columns: 1fr;
+  }
+}
+
+.qr-summary {
+  margin-top: 14px;
+  font-size: 14px;
+  text-align: left;
+  background: #f7f5f1;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.qr-summary dt {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--b-muted);
+  margin-top: 8px;
+}
+
+.qr-summary dt:first-child {
+  margin-top: 0;
+}
+
+.qr-summary dd {
+  margin: 2px 0 0;
+  word-break: break-word;
+}
+
+.qr-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.qr-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+.qr-btn:active {
+  transform: scale(0.98);
+}
+
+.qr-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.qr-btn-primary {
+  background: #0068ff;
+  color: #fff;
+}
+
+.qr-btn-primary:hover:not(:disabled) {
+  background: #0056d6;
+}
+
+.qr-btn-secondary {
+  background: var(--b-ink);
+  color: #fff;
+}
+
+.qr-btn-secondary:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.qr-btn-ghost {
+  background: transparent;
+  color: var(--b-text);
+  border: 1px solid var(--b-card-border);
+}
+
+.qr-toast {
+  position: fixed;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(120%);
+  background: var(--b-text);
+  color: #fff;
+  font-size: 14px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+  z-index: 100;
+  transition: transform 0.25s ease;
+  max-width: min(90vw, 320px);
+  text-align: center;
+}
+
+.qr-toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.qr-foot {
+  font-size: 12px;
+  color: var(--b-muted);
+  text-align: center;
+  margin-top: 8px;
+  line-height: 1.45;
+}
+
+.qr-foot a {
+  color: var(--b-accent-deep);
+  text-decoration: none;
+}
+
+.qr-foot a:hover {
+  text-decoration: underline;
+}
