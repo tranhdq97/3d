@@ -16,8 +16,8 @@
       "products": [
         {
           "id": "den-tulip-da-sac",
-          "title": "Đèn Ngủ Tulip Đa Sắc",
-          "price": 350000,
+          "title": "Đèn Sóng Hoa",
+          "price": 85000,
           "priceDisplay": "350.000 đ",
           "description": "Đèn ngủ trang trí in 3D phong cách hiện đại. Bề mặt hoa văn tinh tế, ánh sáng vàng ấm áp tạo không gian ấm cúng cho phòng ngủ.",
           "media": {
@@ -26,20 +26,20 @@
             "video": {
               "type": "youtube",
               "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+            },
+            "model3d": {
+              "src": "models/Duck.glb",
+              "alt": "Đèn Sóng Hoa"
             }
-            // "model3d": {
-            //   "src": "models/Duck.glb",
-            //   "alt": "Mô hình 3D đèn Tulip"
-            // }
           },
           "specs": [
             { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
-            { "label": "Chất liệu", "value": "Nhựa PLA Nguyên Sinh" },
+            { "label": "Chất liệu", "value": "Nhựa PETG" },
             { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
           ],
           "meta": {
-            "sku": "BD-TULIP-001",
-            "tags": ["đèn ngủ", "decor", "PLA"]
+            "sku": "BD-PETALVEIL-001",
+            "tags": ["đèn ngủ", "decor", "PETG"]
           }
         }
       ]
