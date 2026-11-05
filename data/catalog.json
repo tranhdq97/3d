@@ -25,7 +25,7 @@
             "imageAlt": "Đèn Sóng Hoa",
             "video": {
               "type": "youtube",
-              "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+              "embedUrl": "https://youtube.com/shorts/nkN2laFK4So"
             },
             "model3d": {
               "src": "models/Duck.glb",
