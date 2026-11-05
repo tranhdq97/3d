@@ -16,27 +16,41 @@
       "products": [
         {
           "id": "den-tulip-da-sac",
-          "title": "Đèn Sóng Hoa",
+          "title": "Đèn Sóng Lượn Hình Hoa",
           "price": 85000,
-          "priceDisplay": "90.000 đ",
-          "description": "Đèn Sóng Hoa — đèn bàn trang trí in 3D với chụp gợn sóng trong mờ, ánh sáng ấm dịu xuyên lớp vỏ, tạo điểm nhấn sang trọng cho bàn đọc sách, đầu giường hay góc làm việc. Nhiều màu vỏ để chọn theo phong cách nội thất; đế chắc, form sculptural, dễ phối không gian hiện đại và ấm cúng.",
+          "description": "Đèn bàn trang trí in 3D với chụp gợn sóng trong mờ, ánh sáng ấm dịu xuyên lớp vỏ, tạo điểm nhấn sang trọng cho bàn đọc sách, đầu giường hay góc làm việc. Nhiều màu vỏ để chọn theo phong cách nội thất; đế chắc, form sculptural, dễ phối không gian hiện đại và ấm cúng.",
           "media": {
-            "image": "images/petalveil-lamp-00FF00-warm-interior.jpg",
-            "imageAlt": "Đèn Sóng Hoa",
+            "defaultColor": "green",
+            "colors": [
+              {
+                "id": "green",
+                "name": "Xanh lá",
+                "hex": "#00FF00",
+                "image": "images/petalveil-lamp-00FF00-warm-interior.jpg"
+              },
+              {
+                "id": "pink",
+                "name": "Cam & hồng nhạt",
+                "hex": "#FF69B4",
+                "image": "images/petalveil-lamp-FF6600-FF9999-warm-interior.jpg"
+              }
+            ],
             "video": {
               "type": "youtube",
-              "embedUrl": "https://youtube.com/shorts/nkN2laFK4So"
-            },
-            "model3d": {
-              "src": "models/Duck.glb",
-              "alt": "Đèn Sóng Hoa"
+              "embedUrl": "https://www.youtube.com/embed/nkN2laFK4So"
             }
           },
           "specs": [
-            { "label": "Kích thước", "value": "15 x 12 x 20 cm" },
+            { "label": "Kích thước", "value": "25 x 25 x 30 cm" },
             { "label": "Chất liệu", "value": "Nhựa PETG" },
             { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
           ],
+          "includes": [
+            "Đế",
+            "Thân đèn",
+            "Đèn LED màu ấm 5V USB"
+          ],
+          "includesNote": "Không kèm theo củ sạc",
           "meta": {
             "sku": "BD-PETALVEIL-001",
             "tags": ["đèn ngủ", "decor", "PETG"]

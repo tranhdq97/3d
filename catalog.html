@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    window.__CATALOG_ASSET_BASE__ = (function () {
+      var host = location.hostname;
+      if (/\.github\.io$/i.test(host)) {
+        var parts = location.pathname.split('/').filter(Boolean);
+        if (parts[0]) return '/' + parts[0] + '/';
+      }
+      var path = location.pathname;
+      if (/\.html?$/i.test(path)) return path.slice(0, path.lastIndexOf('/') + 1);
+      if (path.endsWith('/')) return path;
+      if (/^\/[^/]+$/.test(path)) {
+        var page = path.slice(1).toLowerCase();
+        if (page === 'catalog' || page === 'index' || page === 'qr') return '/';
+        return path + '/';
+      }
+      return '/';
+    })();
+  </script>
+  <title>Danh mục — Song Ngư Quán</title>
+  <style>
+    body.theme-b { margin: 0; font-family: system-ui, sans-serif; background: #d8d2c6; }
+    .site-intro-band { background: #5f6b49; color: #fff; padding: 16px 0 14px; }
+    .site-bar { background: #5f6b49; }
+    .catalog-loading { text-align: center; padding: 2rem; color: #6b6560; }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/catalog.css" id="catalog-css" />
+  <script>
+    (function () {
+      var base = window.__CATALOG_ASSET_BASE__;
+      document.getElementById('catalog-css').href = base + 'assets/css/catalog.css?v=23';
+    })();
+  </script>
+</head>
+<body class="theme-b theme-catalog">
+
+  <section class="site-intro-band" id="site-intro">
+    <div class="catalog-container site-intro-row">
+      <a class="back-home" id="back-home" href="index.html">← Trang chủ</a>
+      <div class="site-intro-text">
+        <h1 id="site-title">…</h1>
+        <p id="site-subtitle">Đang tải danh mục…</p>
+      </div>
+    </div>
+  </section>
+
+  <header class="site-bar" id="site-bar">
+    <div class="catalog-container site-toolbar">
+      <nav class="category-nav" aria-label="Danh mục sản phẩm">
+        <div class="category-nav-inner" id="category-nav-inner"></div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="catalog-container catalog-main">
+    <main id="catalog-root">
+      <p class="catalog-loading">Đang tải sản phẩm…</p>
+    </main>
+  </div>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="catalog-container site-footer-inner">
+      <div class="site-footer-brand-block">
+        <p class="site-footer-brand" id="footer-brand">SONG NGƯ QUÁN</p>
+        <p class="site-footer-tagline" id="footer-tagline"></p>
+      </div>
+      <div class="site-footer-contact">
+        <p class="site-footer-phone" id="footer-phone"></p>
+        <a class="site-footer-zalo" id="footer-zalo" href="#" target="_blank" rel="noopener noreferrer">Liên hệ Zalo</a>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <p style="text-align:center;padding:2rem">Trang cần bật JavaScript để hiển thị danh mục.</p>
+  </noscript>
+
+  <script>
+    (function () {
+      var base = window.__CATALOG_ASSET_BASE__;
+      var back = document.getElementById('back-home');
+      if (back) back.href = base + 'index.html';
+      var s = document.createElement('script');
+      s.src = base + 'assets/js/catalog.js?v=23';
+      s.defer = true;
+      s.onerror = function () {
+        var root = document.getElementById('catalog-root');
+        if (root) {
+          root.innerHTML =
+            '<div class="catalog-error"><strong>Không tải được catalog.js</strong><p>URL: ' +
+            s.src + '</p></div>';
+        }
+      };
+      document.body.appendChild(s);
+    })();
+  </script>
+</body>
+</html>

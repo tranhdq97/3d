@@ -13,72 +13,111 @@
       var path = location.pathname;
       if (/\.html?$/i.test(path)) return path.slice(0, path.lastIndexOf('/') + 1);
       if (path.endsWith('/')) return path;
-      if (/^\/[^/]+$/.test(path)) return path + '/';
+      if (/^\/[^/]+$/.test(path)) {
+        var page = path.slice(1).toLowerCase();
+        if (page === 'catalog' || page === 'index' || page === 'qr') return '/';
+        return path + '/';
+      }
       return '/';
     })();
   </script>
-  <title>Song Ngư Quán - Sản phẩm 3D</title>
-  <style>
-    body.theme-b { margin: 0; font-family: system-ui, sans-serif; background: #d8d2c6; }
-    .site-intro-band { background: #5f6b49; color: #fff; padding: 16px 0 14px; }
-    .site-bar { background: #5f6b49; }
-    .catalog-loading { text-align: center; padding: 2rem; color: #6b6560; }
-  </style>
+  <title>Song Ngư Quán</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-  <link rel="stylesheet" href="assets/css/catalog.css" id="catalog-css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/home.css" id="home-css" />
   <script>
     (function () {
       var base = window.__CATALOG_ASSET_BASE__;
-      var css = document.getElementById('catalog-css');
-      css.href = base + 'assets/css/catalog.css?v=15';
+      document.getElementById('home-css').href = base + 'assets/css/home.css?v=2';
     })();
   </script>
 </head>
-<body class="theme-b">
+<body class="theme-home">
 
-  <section class="site-intro-band" id="site-intro">
-    <div class="catalog-container">
-      <h1 id="site-title">…</h1>
-      <p id="site-subtitle">Đang tải danh mục…</p>
-    </div>
-  </section>
-
-  <header class="site-bar" id="site-bar">
-    <div class="catalog-container site-toolbar">
-      <nav class="category-nav" aria-label="Danh mục sản phẩm">
-        <div class="category-nav-inner" id="category-nav-inner"></div>
-      </nav>
+  <header class="home-nav" id="home-nav">
+    <div class="home-container home-nav-inner">
+      <a class="home-nav-brand" id="nav-brand" href="#">SONG NGƯ QUÁN</a>
+      <a class="home-nav-link" id="home-nav-catalog" href="catalog.html">Danh mục</a>
     </div>
   </header>
 
-  <div class="catalog-container catalog-main">
-    <main id="catalog-root">
-      <p class="catalog-loading">Đang tải sản phẩm…</p>
-    </main>
-  </div>
+  <section class="home-hero" id="home-hero" aria-labelledby="home-title">
+    <div class="home-hero-bg" id="home-hero-bg" aria-hidden="true"></div>
+    <div class="home-hero-scrim" aria-hidden="true"></div>
+    <div class="home-container home-hero-content">
+      <p class="home-eyebrow" id="home-eyebrow" data-reveal>In 3D · Decor</p>
+      <h1 id="home-title" data-reveal>…</h1>
+      <p class="home-lead" id="home-lead" data-reveal>Đang tải…</p>
+      <div class="home-hero-actions" data-reveal>
+        <a class="home-cta-primary" id="home-hero-product" href="catalog.html">Khám phá sản phẩm</a>
+        <a class="home-cta-secondary" id="home-catalog-link" href="catalog.html">Xem danh mục</a>
+      </div>
+    </div>
+    <p class="home-scroll-cue" aria-hidden="true"><span>Cuộn để khám phá</span></p>
+  </section>
 
-  <noscript>
-    <p style="text-align:center;padding:2rem">Trang cần bật JavaScript để hiển thị danh mục.</p>
-  </noscript>
+  <section class="home-trust" aria-label="Cam kết chất lượng">
+    <div class="home-container home-trust-grid">
+      <div class="home-trust-item" data-reveal>
+        <span class="home-trust-num">01</span>
+        <h2>In 3D chuẩn form</h2>
+        <p>Chi tiết sắc nét, hoàn thiện mịn trên máy Bambu Lab.</p>
+      </div>
+      <div class="home-trust-item" data-reveal>
+        <span class="home-trust-num">02</span>
+        <h2>Decor có hồn</h2>
+        <p>Thiết kế sculptural — bàn làm việc, đầu giường, góc đọc sách.</p>
+      </div>
+      <div class="home-trust-item" data-reveal>
+        <span class="home-trust-num">03</span>
+        <h2>Đặt hàng nhanh</h2>
+        <p>Nhắn Zalo, tư vấn màu và giao hàng tận nơi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-collection" aria-labelledby="home-collection-title">
+    <div class="home-container">
+      <header class="home-section-head" data-reveal>
+        <p class="home-section-eyebrow">Bộ sưu tập</p>
+        <h2 id="home-collection-title">Sản phẩm nổi bật</h2>
+      </header>
+      <div id="home-root">
+        <p class="home-loading">Đang tải bộ sưu tập…</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-cta-band" id="home-cta-band" data-reveal>
+    <div class="home-container home-cta-band-inner">
+      <h2>Sẵn sàng đặt hàng?</h2>
+      <p id="home-cta-lead">Liên hệ trực tiếp — tư vấn miễn phí.</p>
+      <p class="home-cta-phone" id="home-cta-phone"></p>
+      <div class="home-cta-band-actions">
+        <a class="home-cta-primary home-cta-primary--dark" id="home-cta-zalo" href="#" target="_blank" rel="noopener noreferrer">Đặt qua Zalo</a>
+        <a class="home-cta-secondary home-cta-secondary--dark" id="home-cta-catalog" href="catalog.html">Xem giá &amp; chi tiết</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="home-footer">
+    <div class="home-container home-footer-inner">
+      <p class="home-footer-copy" id="home-footer-copy">© Song Ngư Quán</p>
+      <a id="home-footer-zalo" href="#" target="_blank" rel="noopener noreferrer">Liên hệ Zalo</a>
+    </div>
+  </footer>
 
   <script>
     (function () {
       var base = window.__CATALOG_ASSET_BASE__;
+      var catalogHref = base + 'catalog.html';
+      document.getElementById('home-catalog-link').href = catalogHref;
+      document.getElementById('home-nav-catalog').href = catalogHref;
+      document.getElementById('home-cta-catalog').href = catalogHref;
       var s = document.createElement('script');
-      s.src = base + 'assets/js/catalog.js?v=14';
+      s.src = base + 'assets/js/home.js?v=2';
       s.defer = true;
-      s.onerror = function () {
-        var root = document.getElementById('catalog-root');
-        if (root) {
-          root.innerHTML =
-            '<div class="catalog-error"><strong>Không tải được catalog.js</strong><p>URL: ' +
-            s.src +
-            '</p><p>Kiểm tra GitHub Pages đã deploy file assets/js/catalog.js</p></div>';
-        }
-      };
       document.body.appendChild(s);
     })();
   </script>

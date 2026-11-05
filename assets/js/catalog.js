@@ -12,16 +12,62 @@ const CATALOG_URL = assetUrl('data/catalog.json');
 
 const PHOTO_TAB_ICON = `<svg class="tab-icon tab-icon-stroke" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.75" cy="10.25" r="1.75" fill="currentColor" stroke="none"/><path d="M21 16.25 14.5 10.5a1.1 1.1 0 0 0-1.45-.02L3 17.5"/></svg>`;
 
-const MODEL3D_TAB_ICON = `<svg class="tab-icon tab-icon-stroke" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 21 8v8l-9 5-9-5V8l9-5z"/><path d="M12 12 21 8M12 12v10M12 12 3 8"/></svg>`;
-
 const YOUTUBE_TAB_ICON = `<svg class="tab-icon tab-icon-youtube" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>`;
 
+function getProductColors(product) {
+  const colors = product.media?.colors;
+  if (Array.isArray(colors) && colors.length) return colors;
+  if (product.media?.image) {
+    return [{ id: 'default', name: '', hex: null, image: product.media.image }];
+  }
+  return [];
+}
+
+function getDefaultColorId(product) {
+  const colors = getProductColors(product);
+  const preferred = product.media?.defaultColor;
+  if (preferred && colors.some((c) => c.id === preferred)) return preferred;
+  return colors[0]?.id || null;
+}
+
+function findColorById(product, colorId) {
+  return getProductColors(product).find((c) => c.id === colorId) || null;
+}
+
+function getColorImage(color) {
+  if (!color) return null;
+  if (color.image) return color.image;
+  if (Array.isArray(color.images) && color.images[0]) return color.images[0];
+  return null;
+}
+
+function productPrimaryImage(product) {
+  const color = findColorById(product, getDefaultColorId(product));
+  const src = getColorImage(color);
+  if (src) return src;
+  return product.media?.image || null;
+}
+
+function sanitizeHex(hex) {
+  if (!hex || typeof hex !== 'string') return '#cccccc';
+  const t = hex.trim();
+  if (/^#[0-9A-Fa-f]{3,8}$/.test(t)) return t;
+  return '#cccccc';
+}
+
+function mediaLabel(product) {
+  return product.title || '';
+}
+
 function formatPrice(product) {
-  if (product.priceDisplay) return product.priceDisplay;
   if (typeof product.price === 'number') {
     return `${product.price.toLocaleString('vi-VN')} đ`;
   }
   return '';
+}
+
+function hasYoutubeVideo(product) {
+  return Boolean(product.media?.video?.embedUrl);
 }
 
 function escapeHtml(text) {
@@ -30,11 +76,31 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
-function buildPhotoMarkup(product) {
-  const src = product.media?.image;
-  if (!src) return '<p class="category-empty" style="margin:0;border:none;background:transparent">Chưa có ảnh</p>';
-  const alt = escapeHtml(product.media.imageAlt || product.title);
+function buildPhotoMarkup(product, imageSrc) {
+  const src = imageSrc || productPrimaryImage(product);
+  const label = escapeHtml(mediaLabel(product));
+  if (!src) {
+    return buildMediaFallbackMarkup(product);
+  }
+  const alt = label;
   return `<img src="${escapeHtml(assetUrl(src))}" alt="${alt}" loading="lazy" />`;
+}
+
+function renderColorSwatches(product) {
+  const colors = getProductColors(product);
+  if (!colors.length) return '';
+
+  const defaultId = getDefaultColorId(product);
+  const buttons = colors
+    .map((c) => {
+      const name = escapeHtml(c.name || c.id);
+      const hex = sanitizeHex(c.hex);
+      const selected = c.id === defaultId;
+      return `<button type="button" class="color-swatch" role="option" data-color-id="${escapeHtml(c.id)}" aria-label="${name}" aria-selected="${selected ? 'true' : 'false'}" style="--swatch:${escapeHtml(hex)}" title="${name}"></button>`;
+    })
+    .join('');
+
+  return `<div class="color-swatches" role="listbox" aria-label="Chọn màu" data-color-swatches>${buttons}</div>`;
 }
 
 function buildVideoMarkup(product) {
@@ -42,49 +108,66 @@ function buildVideoMarkup(product) {
   if (!video?.embedUrl) return null;
   const url = escapeHtml(video.embedUrl);
   const sep = url.includes('?') ? '&' : '?';
-  return `<iframe src="${url}${sep}autoplay=1" allow="autoplay; encrypted-media" allowfullscreen title="Video ${escapeHtml(product.title)}"></iframe>`;
+  const title = escapeHtml(`Video — ${mediaLabel(product)}`);
+  return `<iframe src="${url}${sep}autoplay=1" allow="autoplay; encrypted-media" allowfullscreen title="${title}"></iframe>`;
 }
 
-function buildModelMarkup(product) {
-  const model = product.media?.model3d;
-  if (!model?.src) return null;
-  const src = escapeHtml(assetUrl(model.src));
-  const alt = escapeHtml(model.alt || product.title);
-  return `<model-viewer src="${src}" alt="${alt}" auto-rotate camera-controls shadow-intensity="1"></model-viewer>`;
+function renderMediaTabs(product) {
+  if (!hasYoutubeVideo(product)) return '';
+  return `
+          <div class="media-tabs" role="tablist" aria-label="Loại media">
+            <button type="button" class="tab-btn active" data-tab="photo" role="tab" aria-label="Ảnh">${PHOTO_TAB_ICON}</button>
+            <button type="button" class="tab-btn tab-btn-youtube" data-tab="video" role="tab" aria-label="YouTube">${YOUTUBE_TAB_ICON}</button>
+          </div>`;
+}
+
+function renderIncludes(product) {
+  const items = product.includes;
+  if (!Array.isArray(items) || !items.length) return '';
+  const list = items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+  const note = product.includesNote
+    ? `<p class="includes-note">${escapeHtml(product.includesNote)}</p>`
+    : '';
+  return `
+        <div class="includes-block">
+          <p class="includes-heading">Sản phẩm bao gồm</p>
+          <ul class="includes-list">${list}</ul>
+          ${note}
+        </div>`;
 }
 
 function renderSpecsCompact(specs) {
   if (!specs?.length) return '';
   const top = specs.slice(0, 2);
   const items = top
-    .map((s) => `<li>${escapeHtml(s.label)}: <strong>${escapeHtml(s.value)}</strong></li>`)
+    .map(
+      (s) => `<li>${escapeHtml(s.label)}: <strong>${escapeHtml(s.value)}</strong></li>`
+    )
     .join('');
   return `<ul class="specs-compact">${items}</ul>`;
 }
 
 function renderProductCard(product, contact) {
   const cardId = `product-${product.id}`;
-  const hasVideo = Boolean(product.media?.video?.embedUrl);
-  const has3d = Boolean(product.media?.model3d?.src);
   const zaloUrl = escapeHtml(contact.zaloUrl || '#');
+  const priceHtml = formatPrice(product);
 
   return `
     <article class="product-card" id="${escapeHtml(cardId)}" data-product-id="${escapeHtml(product.id)}">
       <div class="media-section">
-        <div class="media-canvas">
+        <div class="media-canvas" data-media-canvas>
           <div class="media-viewport" data-viewport></div>
-          <div class="media-tabs" role="tablist" aria-label="Loại media">
-            <button type="button" class="tab-btn active" data-tab="photo" role="tab" aria-label="Ảnh">${PHOTO_TAB_ICON}</button>
-            <button type="button" class="tab-btn" data-tab="model3d" role="tab" aria-label="Xem 3D" ${has3d ? '' : 'disabled'}>${MODEL3D_TAB_ICON}</button>
-            <button type="button" class="tab-btn tab-btn-youtube" data-tab="video" role="tab" aria-label="YouTube" ${hasVideo ? '' : 'disabled'}>${YOUTUBE_TAB_ICON}</button>
-          </div>
+          ${renderColorSwatches(product)}
+          ${renderMediaTabs(product)}
         </div>
       </div>
       <div class="details-section">
         <h3 class="product-title">${escapeHtml(product.title)}</h3>
-        <div class="price-tag">${escapeHtml(formatPrice(product))}</div>
+        ${priceHtml ? `<div class="price-tag">${escapeHtml(priceHtml)}</div>` : ''}
         <p class="description">${escapeHtml(product.description)}</p>
         ${renderSpecsCompact(product.specs)}
+        ${renderIncludes(product)}
+        <p class="color-selected-label" data-color-label hidden></p>
         <a href="${zaloUrl}" target="_blank" rel="noopener noreferrer" class="btn-zalo">💬 Zalo</a>
       </div>
     </article>
@@ -111,31 +194,101 @@ function renderCategorySection(category, contact) {
   `;
 }
 
+function buildMediaFallbackMarkup(product) {
+  const label = escapeHtml(mediaLabel(product) || 'Sản phẩm');
+  return `<div class="media-fallback"><span>${label}</span></div>`;
+}
+
+function bindPhotoFallback(viewport, product) {
+  const img = viewport.querySelector('img');
+  if (!img) return;
+  img.addEventListener(
+    'error',
+    () => {
+      viewport.innerHTML = buildMediaFallbackMarkup(product);
+    },
+    { once: true }
+  );
+}
+
 function initProductCard(card, product) {
+  const canvas = card.querySelector('[data-media-canvas]');
   const viewport = card.querySelector('[data-viewport]');
   const tabs = card.querySelectorAll('.tab-btn[data-tab]');
+  const swatchesHost = card.querySelector('[data-color-swatches]');
+  const colorLabel = card.querySelector('[data-color-label]');
+
+  let selectedColorId = getDefaultColorId(product);
+
+  function updateColorLabel() {
+    if (!colorLabel) return;
+    const colors = getProductColors(product);
+    if (colors.length < 2 && !colors[0]?.name) {
+      colorLabel.hidden = true;
+      return;
+    }
+    const color = findColorById(product, selectedColorId);
+    const name = color?.name || color?.id;
+    if (!name) {
+      colorLabel.hidden = true;
+      return;
+    }
+    colorLabel.hidden = false;
+    colorLabel.textContent = `Màu: ${name}`;
+  }
+
+  function syncSwatches() {
+    if (!swatchesHost) return;
+    swatchesHost.querySelectorAll('.color-swatch').forEach((btn) => {
+      const on = btn.dataset.colorId === selectedColorId;
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+
+  function currentPhotoSrc() {
+    const color = findColorById(product, selectedColorId);
+    return getColorImage(color) || productPrimaryImage(product);
+  }
+
+  function showPhoto() {
+    viewport.classList.remove('is-video');
+    if (canvas) canvas.classList.remove('is-video-mode');
+    viewport.innerHTML = buildPhotoMarkup(product, currentPhotoSrc());
+    bindPhotoFallback(viewport, product);
+    syncSwatches();
+    updateColorLabel();
+  }
 
   function setTab(active) {
     tabs.forEach((btn) => {
-      const isActive = btn.dataset.tab === active;
-      btn.classList.toggle('active', isActive);
+      btn.classList.toggle('active', btn.dataset.tab === active);
     });
 
-    viewport.classList.toggle('is-video', active === 'video');
+    const isVideo = active === 'video';
+    viewport.classList.toggle('is-video', isVideo);
+    if (canvas) canvas.classList.toggle('is-video-mode', isVideo);
 
-    if (active === 'photo') {
-      viewport.innerHTML = buildPhotoMarkup(product);
-      return;
-    }
-    if (active === 'video') {
+    if (isVideo) {
       const html = buildVideoMarkup(product);
-      viewport.innerHTML = html || buildPhotoMarkup(product);
+      viewport.innerHTML = html || buildPhotoMarkup(product, currentPhotoSrc());
+      if (!html) bindPhotoFallback(viewport, product);
       return;
     }
-    if (active === 'model3d') {
-      const html = buildModelMarkup(product);
-      viewport.innerHTML = html || buildPhotoMarkup(product);
-    }
+    showPhoto();
+  }
+
+  if (swatchesHost) {
+    swatchesHost.querySelectorAll('.color-swatch').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        selectedColorId = btn.dataset.colorId;
+        const photoTab = card.querySelector('.tab-btn[data-tab="photo"]');
+        if (photoTab && !photoTab.classList.contains('active')) {
+          setTab('photo');
+          return;
+        }
+        showPhoto();
+      });
+    });
   }
 
   tabs.forEach((btn) => {
@@ -192,6 +345,37 @@ function findProductById(catalog, productId) {
   return null;
 }
 
+function phoneTel(display) {
+  if (!display) return '';
+  const digits = String(display).replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits.startsWith('0')) return `tel:+84${digits.slice(1)}`;
+  return `tel:+${digits}`;
+}
+
+function renderSiteFooter(site) {
+  const contact = site.contact || {};
+  const brand = document.getElementById('footer-brand');
+  const tagline = document.getElementById('footer-tagline');
+  const phone = document.getElementById('footer-phone');
+  const zalo = document.getElementById('footer-zalo');
+
+  if (brand) brand.textContent = site.title || brand.textContent;
+  if (tagline) tagline.textContent = site.subtitle || '';
+
+  if (phone && contact.phoneDisplay) {
+    const tel = phoneTel(contact.phoneDisplay);
+    phone.innerHTML = tel
+      ? `📞 <a href="${escapeHtml(tel)}">${escapeHtml(contact.phoneDisplay)}</a>`
+      : escapeHtml(contact.phoneDisplay);
+  }
+
+  if (zalo && contact.zaloUrl) {
+    zalo.href = contact.zaloUrl;
+    zalo.textContent = contact.ctaLabel || 'Liên hệ Zalo';
+  }
+}
+
 function renderCatalog(catalog) {
   const root = document.getElementById('catalog-root');
   const site = catalog.site || {};
@@ -229,6 +413,26 @@ function renderCatalog(catalog) {
   initCategoryNav(catalog.categories || []);
   initRevealCards();
   initPinnedCategoryBar();
+  focusProductFromHash();
+  renderSiteFooter(site);
+}
+
+function focusProductFromHash() {
+  const hash = window.location.hash;
+  if (!hash || !hash.startsWith('#product-')) return;
+
+  const card = document.querySelector(hash);
+  if (!card) return;
+
+  const run = () => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('product-card--focus');
+    window.setTimeout(() => card.classList.remove('product-card--focus'), 3500);
+  };
+
+  window.requestAnimationFrame(() => {
+    window.setTimeout(run, 280);
+  });
 }
 
 function initPinnedCategoryBar() {
