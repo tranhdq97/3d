@@ -15,7 +15,7 @@
       "description": "Đèn ngủ, trang trí phòng — hoàn thiện mịn, in từ máy Bambu Lab.",
       "products": [
         {
-          "id": "den-tulip-da-sac",
+          "id": "den-peitalveil",
           "title": "Đèn Sóng Lượn Hình Hoa",
           "price": 85000,
           "description": "Đèn bàn trang trí in 3D với chụp gợn sóng trong mờ, ánh sáng ấm dịu xuyên lớp vỏ, tạo điểm nhấn sang trọng cho bàn đọc sách, đầu giường hay góc làm việc. Nhiều màu vỏ để chọn theo phong cách nội thất; đế chắc, form sculptural, dễ phối không gian hiện đại và ấm cúng.",
@@ -26,13 +26,25 @@
                 "id": "green",
                 "name": "Xanh lá",
                 "hex": "#00FF00",
+                "translucent": true,
+                "opacity": 0.5,
                 "image": "images/petalveil-lamp-00FF00-warm-interior.jpg"
               },
               {
                 "id": "pink",
-                "name": "Cam & hồng nhạt",
-                "hex": "#FF69B4",
+                "name": "Hồng nhạt · đế cam tươi",
+                "hex": "#FF9999",
+                "translucent": true,
+                "opacity": 0.5,
                 "image": "images/petalveil-lamp-FF6600-FF9999-warm-interior.jpg"
+              },
+              {
+                "id": "white-green-base",
+                "name": "Trắng trong · đế xanh non",
+                "hex": "#E8F5E9",
+                "translucent": true,
+                "opacity": 0.5,
+                "image": "images/petalveil-lamp-white-greenbase-warm-interior.jpg"
               }
             ],
             "video": {
@@ -53,6 +65,43 @@
           "includesNote": "Không kèm theo củ sạc",
           "meta": {
             "sku": "BD-PETALVEIL-001",
+            "tags": ["đèn ngủ", "decor", "PETG"]
+          }
+        },
+        {
+          "id": "den-sea-coral",
+          "title": "Đèn San Hô",
+          "price": 125000,
+          "description": "Đèn bàn trang trí in 3D với chụp gợn sóng trong mờ, ánh sáng ấm dịu xuyên lớp vỏ, tạo điểm nhấn sang trọng cho bàn đọc sách, đầu giường hay góc làm việc. Nhiều màu vỏ để chọn theo phong cách nội thất; đế chắc, form sculptural, dễ phối không gian hiện đại và ấm cúng.",
+          "media": {
+            "defaultColor": "be",
+            "colors": [
+              {
+                "id": "be",
+                "name": "Be",
+                "hex": "#FFF7DB",
+                "translucent": false,
+                "image": "images/seacoral-lamp-white-coffeebase-warm-interior.jpg"
+              }
+            ],
+            "video": {
+              "type": "youtube",
+              "embedUrl": "https://youtube.com/embed/jz3kMnnVuOU"
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "25 x 25 x 30 cm" },
+            { "label": "Chất liệu", "value": "Nhựa PETG" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "includes": [
+            "Đế",
+            "Thân đèn",
+            "Đèn LED màu ấm 5V USB"
+          ],
+          "includesNote": "Không kèm theo củ sạc",
+          "meta": {
+            "sku": "BD-SEACORAL-001",
             "tags": ["đèn ngủ", "decor", "PETG"]
           }
         }

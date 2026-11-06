@@ -96,7 +96,14 @@ function renderColorSwatches(product) {
       const name = escapeHtml(c.name || c.id);
       const hex = sanitizeHex(c.hex);
       const selected = c.id === defaultId;
-      return `<button type="button" class="color-swatch" role="option" data-color-id="${escapeHtml(c.id)}" aria-label="${name}" aria-selected="${selected ? 'true' : 'false'}" style="--swatch:${escapeHtml(hex)}" title="${name}"></button>`;
+      const translucent = c.translucent === true;
+      const alpha =
+        typeof c.opacity === 'number' && c.opacity >= 0 && c.opacity <= 1 ? c.opacity : 0.48;
+      const swatchClass = translucent ? 'color-swatch color-swatch--translucent' : 'color-swatch';
+      const style = translucent
+        ? `--swatch:${escapeHtml(hex)};--swatch-alpha:${alpha}`
+        : `--swatch:${escapeHtml(hex)}`;
+      return `<button type="button" class="${swatchClass}" role="option" data-color-id="${escapeHtml(c.id)}" aria-label="${name}" aria-selected="${selected ? 'true' : 'false'}" style="${style}" title="${name}"></button>`;
     })
     .join('');
 
