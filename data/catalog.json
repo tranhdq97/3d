@@ -1,11 +1,24 @@
 {
   "site": {
     "title": "SONG NGƯ QUÁN",
-    "subtitle": "Sản phẩm in 3D hoàn thiện & Đồ decor độc đáo",
+    "subtitle": "Sản phẩm in 3D hoàn thiện & decor độc đáo — nhận in theo yêu cầu (STL/3MF)",
     "contact": {
       "zaloUrl": "https://zalo.me/0367443890",
       "phoneDisplay": "0367.443.890",
       "ctaLabel": "💬 Đặt Hàng Qua Zalo"
+    },
+    "customPrint": {
+      "enabled": true,
+      "badge": "Dịch vụ · Bambu Lab",
+      "title": "In 3D theo yêu cầu",
+      "tagline": "Gửi file hoặc mô tả ý tưởng — in mẫu lẻ, phụ kiện, decor & đèn theo đơn hàng của bạn.",
+      "highlights": [
+        "Nhận STL, 3MF, STEP hoặc hình ảnh tham chiếu",
+        "PETG / PLA+ · hoàn thiện mịn, màu theo yêu cầu",
+        "Báo giá & thời gian in qua Zalo — giao toàn quốc"
+      ],
+      "note": "Giá theo khối lượng nhựa, độ phức tạp và mức hoàn thiện — không bắt buộc mua sản phẩm có sẵn trong danh mục.",
+      "ctaLabel": "💬 Gửi file & báo giá Zalo"
     }
   },
   "categories": [
@@ -24,10 +37,10 @@
             "colors": [
               {
                 "id": "green",
-                "name": "Xanh lá",
-                "hex": "#00FF00",
+                "name": "Xanh lá . đế nâu cafe",
+                "hex": "#00bf0d",
                 "translucent": true,
-                "opacity": 0.5,
+                "opacity": 0.3,
                 "image": "images/petalveil-lamp-00FF00-warm-interior.jpg"
               },
               {
@@ -35,7 +48,7 @@
                 "name": "Hồng nhạt · đế cam tươi",
                 "hex": "#FF9999",
                 "translucent": true,
-                "opacity": 0.5,
+                "opacity": 0.3,
                 "image": "images/petalveil-lamp-FF6600-FF9999-warm-interior.jpg"
               },
               {
@@ -43,7 +56,7 @@
                 "name": "Trắng trong · đế xanh non",
                 "hex": "#E8F5E9",
                 "translucent": true,
-                "opacity": 0.5,
+                "opacity": 0.3,
                 "image": "images/petalveil-lamp-white-greenbase-warm-interior.jpg"
               }
             ],
@@ -53,7 +66,7 @@
             }
           },
           "specs": [
-            { "label": "Kích thước", "value": "162 x 163 x 205 mm" },
+            { "label": "Kích thước", "value": "162x163x205 mm" },
             { "label": "Chất liệu", "value": "Nhựa PETG" },
             { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
           ],
@@ -90,7 +103,7 @@
             }
           },
           "specs": [
-            { "label": "Kích thước", "value": "165 x 185 x 260 cm" },
+            { "label": "Kích thước", "value": "165x185x260 mm" },
             { "label": "Chất liệu", "value": "Nhựa PETG" },
             { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
           ],
@@ -102,6 +115,98 @@
           "includesNote": "Không kèm theo củ sạc",
           "meta": {
             "sku": "BD-SEACORAL-001",
+            "tags": ["đèn ngủ", "decor", "PETG"]
+          }
+        },
+        {
+          "id": "den-mos-glow-lite",
+          "title": "Đèn Mosglow Lite",
+          "price": 100000,
+          "description": "Đèn bàn trang trí in 3D với chụp gợn sóng trong mờ, ánh sáng ấm dịu xuyên lớp vỏ, tạo điểm nhấn sang trọng cho bàn đọc sách, đầu giường hay góc làm việc. Nhiều màu vỏ để chọn theo phong cách nội thất; đế chắc, form sculptural, dễ phối không gian hiện đại và ấm cúng.",
+          "media": {
+            "defaultColor": "white-green-base",
+            "colors": [
+              {
+                "id": "white-green-base",
+                "name": "Trắng trong · đế xanh",
+                "hex": "#ffffff",
+                "translucent": true,
+                "opacity": 0.3,
+                "image": "images/mosglow-lite-00FF11-warm-interior.jpg"
+              },
+              {
+                "id": "pink-orange-base",
+                "name": "Hồng nhạt trong · đế cam",
+                "hex": "#FF9999",
+                "translucent": true,
+                "opacity": 0.3,
+                "image": "images/mosglow-lite-FF6F00-FF9999-warm-interior.jpg"
+              },
+              {
+                "id": "green-coffee-base",
+                "name": "Xanh trong · đế nâu cafe",
+                "hex": "#00BF0D",
+                "translucent": true,
+                "opacity": 0.3,
+                "image": "images/mosglow-lite-00BF0D-coffeebase-warm-interior.jpg"
+              }
+            ],
+            "video": {
+              "type": "youtube",
+              "embedUrl": ""
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "145x145x200 mm" },
+            { "label": "Chất liệu", "value": "Nhựa PETG" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "includes": [
+            "Đế",
+            "Thân đèn",
+            "Đèn LED màu ấm 5V USB"
+          ],
+          "includesNote": "Không kèm theo củ sạc",
+          "meta": {
+            "sku": "BD-MOSGLOW-LITE-001",
+            "tags": ["đèn ngủ", "decor", "PETG"]
+          }
+        },
+        {
+          "id": "den-moripop",
+          "title": "Đèn MoriPop",
+          "price": 135000,
+          "description": "Đèn bàn trang trí in 3D với chụp gợn sóng trong mờ, ánh sáng ấm dịu xuyên lớp vỏ, tạo điểm nhấn sang trọng cho bàn đọc sách, đầu giường hay góc làm việc. Nhiều màu vỏ để chọn theo phong cách nội thất; đế chắc, form sculptural, dễ phối không gian hiện đại và ấm cúng.",
+          "media": {
+            "defaultColor": "white-green-base",
+            "colors": [
+              {
+                "id": "white-green-base",
+                "name": "Trắng trong · đế xanh",
+                "hex": "#ffffff",
+                "translucent": true,
+                "opacity": 0.3,
+                "image": "images/moripop-00FF11-warm-interior.jpg"
+              }
+            ],
+            "video": {
+              "type": "youtube",
+              "embedUrl": ""
+            }
+          },
+          "specs": [
+            { "label": "Kích thước", "value": "250x240x285 mm" },
+            { "label": "Chất liệu", "value": "Nhựa PETG" },
+            { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
+          ],
+          "includes": [
+            "Đế",
+            "Thân đèn",
+            "Đèn LED màu ấm 5V USB"
+          ],
+          "includesNote": "Không kèm theo củ sạc",
+          "meta": {
+            "sku": "BD-MORIPOP-001",
             "tags": ["đèn ngủ", "decor", "PETG"]
           }
         }

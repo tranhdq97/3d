@@ -29,7 +29,7 @@
   <script>
     (function () {
       var base = window.__CATALOG_ASSET_BASE__;
-      document.getElementById('home-css').href = base + 'assets/css/home.css?v=2';
+      document.getElementById('home-css').href = base + 'assets/css/home.css?v=4';
     })();
   </script>
 </head>
@@ -38,7 +38,10 @@
   <header class="home-nav" id="home-nav">
     <div class="home-container home-nav-inner">
       <a class="home-nav-brand" id="nav-brand" href="#">SONG NGƯ QUÁN</a>
-      <a class="home-nav-link" id="home-nav-catalog" href="catalog.html">Danh mục</a>
+      <nav class="home-nav-actions">
+        <a class="home-nav-link home-nav-link--accent" id="home-nav-custom-print" href="#home-custom-print">In theo yêu cầu</a>
+        <a class="home-nav-link" id="home-nav-catalog" href="catalog.html">Danh mục</a>
+      </nav>
     </div>
   </header>
 
@@ -51,10 +54,15 @@
       <p class="home-lead" id="home-lead" data-reveal>Đang tải…</p>
       <div class="home-hero-actions" data-reveal>
         <a class="home-cta-primary" id="home-hero-product" href="catalog.html">Khám phá sản phẩm</a>
+        <a class="home-cta-primary home-cta-primary--outline" id="home-hero-custom-print" href="#home-custom-print">In 3D theo yêu cầu</a>
         <a class="home-cta-secondary" id="home-catalog-link" href="catalog.html">Xem danh mục</a>
       </div>
     </div>
     <p class="home-scroll-cue" aria-hidden="true"><span>Cuộn để khám phá</span></p>
+  </section>
+
+  <section class="home-custom-print" id="home-custom-print" aria-labelledby="home-custom-print-title" hidden>
+    <div class="home-container home-custom-print-inner" id="home-custom-print-root" data-reveal></div>
   </section>
 
   <section class="home-trust" aria-label="Cam kết chất lượng">
@@ -116,7 +124,7 @@
       document.getElementById('home-nav-catalog').href = catalogHref;
       document.getElementById('home-cta-catalog').href = catalogHref;
       var s = document.createElement('script');
-      s.src = base + 'assets/js/home.js?v=2';
+      s.src = base + 'assets/js/home.js?v=3';
       s.defer = true;
       document.body.appendChild(s);
     })();

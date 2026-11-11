@@ -109,6 +109,111 @@ body {
   line-height: 1.5;
 }
 
+.custom-print-promo {
+  background: linear-gradient(120deg, #ece7de 0%, #e2ead8 45%, #d8e4d0 100%);
+  border-bottom: 1px solid rgba(95, 107, 73, 0.2);
+  padding: clamp(20px, 4vw, 28px) 0;
+}
+
+.custom-print-promo-inner {
+  display: grid;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .custom-print-promo-inner {
+    grid-template-columns: 1fr auto auto;
+    gap: 20px 24px;
+  }
+
+  .custom-print-promo-pills {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1100px) {
+  .custom-print-promo-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .custom-print-promo-pills {
+    grid-column: auto;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    max-width: 420px;
+  }
+
+  .custom-print-promo-cta {
+    grid-column: 2;
+    justify-self: end;
+    align-self: end;
+  }
+}
+
+.custom-print-promo-eyebrow {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--b-accent-deep);
+}
+
+.custom-print-promo-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  color: var(--b-ink-deep);
+  line-height: 1.12;
+  margin-top: 6px;
+}
+
+.custom-print-promo-lead {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--b-muted);
+  line-height: 1.5;
+  max-width: 42em;
+}
+
+.custom-print-promo-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.custom-print-promo-pill {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--b-ink-deep);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(95, 107, 73, 0.15);
+  padding: 8px 12px;
+  border-radius: 999px;
+}
+
+.custom-print-promo-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, var(--b-ink) 0%, var(--b-ink-deep) 100%);
+  box-shadow: 0 8px 22px rgba(47, 51, 40, 0.22);
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-print-promo-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(47, 51, 40, 0.26);
+}
+
 .site-bar {
   position: fixed;
   top: 0;

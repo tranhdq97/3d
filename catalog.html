@@ -35,7 +35,7 @@
   <script>
     (function () {
       var base = window.__CATALOG_ASSET_BASE__;
-      document.getElementById('catalog-css').href = base + 'assets/css/catalog.css?v=25';
+      document.getElementById('catalog-css').href = base + 'assets/css/catalog.css?v=26';
     })();
   </script>
 </head>
@@ -58,6 +58,8 @@
       </nav>
     </div>
   </header>
+
+  <aside class="custom-print-promo" id="custom-print-promo" hidden aria-label="In 3D theo yêu cầu"></aside>
 
   <div class="catalog-container catalog-main">
     <main id="catalog-root">
@@ -88,7 +90,7 @@
       var back = document.getElementById('back-home');
       if (back) back.href = base + 'index.html';
       var s = document.createElement('script');
-      s.src = base + 'assets/js/catalog.js?v=25';
+      s.src = base + 'assets/js/catalog.js?v=26';
       s.defer = true;
       s.onerror = function () {
         var root = document.getElementById('catalog-root');

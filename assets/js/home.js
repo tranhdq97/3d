@@ -70,6 +70,45 @@ function renderShowcaseTile(product, categoryName, options = {}) {
   `;
 }
 
+function renderCustomPrint(site) {
+  const svc = site.customPrint;
+  const section = document.getElementById('home-custom-print');
+  const root = document.getElementById('home-custom-print-root');
+  if (!svc?.enabled || !section || !root) {
+    if (section) section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+  const highlights = (svc.highlights || [])
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
+    .join('');
+  const zalo = site.contact?.zaloUrl || '#';
+  const cta = svc.ctaLabel || site.contact?.ctaLabel || 'Liên hệ Zalo';
+  const catalogHref = escapeHtml(catalogPageUrl());
+
+  root.innerHTML = `
+    <div class="home-custom-print-card">
+      <div class="home-custom-print-copy">
+        <p class="home-custom-print-badge">${escapeHtml(svc.badge || 'Dịch vụ')}</p>
+        <h2 id="home-custom-print-title">${escapeHtml(svc.title || 'In 3D theo yêu cầu')}</h2>
+        <p class="home-custom-print-tagline">${escapeHtml(svc.tagline || '')}</p>
+        ${highlights ? `<ul class="home-custom-print-list">${highlights}</ul>` : ''}
+        ${svc.note ? `<p class="home-custom-print-note">${escapeHtml(svc.note)}</p>` : ''}
+        <div class="home-custom-print-actions">
+          <a class="home-cta-primary home-cta-primary--dark" href="${escapeHtml(zalo)}" target="_blank" rel="noopener noreferrer">${escapeHtml(cta)}</a>
+          <a class="home-custom-print-link" href="${catalogHref}">Xem đèn &amp; decor có sẵn</a>
+        </div>
+      </div>
+      <div class="home-custom-print-visual" aria-hidden="true">
+        <div class="home-custom-print-orbit"></div>
+        <div class="home-custom-print-chip">STL · 3MF · STEP</div>
+        <div class="home-custom-print-chip home-custom-print-chip--alt">Màu &amp; hoàn thiện</div>
+      </div>
+    </div>
+  `;
+}
+
 function applyContact(site) {
   const contact = site.contact || {};
   const zaloLabel = contact.ctaLabel || 'Liên hệ Zalo';
@@ -156,6 +195,7 @@ function renderHome(catalog) {
   if (leadEl) leadEl.textContent = site.subtitle || '';
 
   applyContact(site);
+  renderCustomPrint(site);
 
   const products = [];
   for (const category of catalog.categories || []) {

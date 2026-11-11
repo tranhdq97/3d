@@ -383,10 +383,41 @@ function renderSiteFooter(site) {
   }
 }
 
+function renderCustomPrintPromo(site) {
+  const svc = site.customPrint;
+  const promo = document.getElementById('custom-print-promo');
+  if (!svc?.enabled || !promo) {
+    if (promo) promo.hidden = true;
+    return;
+  }
+
+  promo.hidden = false;
+  const highlights = (svc.highlights || [])
+    .slice(0, 3)
+    .map((item) => `<span class="custom-print-promo-pill">${escapeHtml(item)}</span>`)
+    .join('');
+  const zalo = site.contact?.zaloUrl || '#';
+  const cta = svc.ctaLabel || site.contact?.ctaLabel || 'Liên hệ Zalo';
+
+  promo.innerHTML = `
+    <div class="catalog-container custom-print-promo-inner">
+      <div class="custom-print-promo-text">
+        <p class="custom-print-promo-eyebrow">${escapeHtml(svc.badge || 'Dịch vụ')}</p>
+        <h2 class="custom-print-promo-title">${escapeHtml(svc.title || 'In 3D theo yêu cầu')}</h2>
+        <p class="custom-print-promo-lead">${escapeHtml(svc.tagline || '')}</p>
+      </div>
+      ${highlights ? `<div class="custom-print-promo-pills">${highlights}</div>` : ''}
+      <a class="custom-print-promo-cta" href="${escapeHtml(zalo)}" target="_blank" rel="noopener noreferrer">${escapeHtml(cta)}</a>
+    </div>
+  `;
+}
+
 function renderCatalog(catalog) {
   const root = document.getElementById('catalog-root');
   const site = catalog.site || {};
   const contact = site.contact || {};
+
+  renderCustomPrintPromo(site);
 
   document.title = site.title ? `${site.title} - Sản Phẩm In 3D` : document.title;
 
