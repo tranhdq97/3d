@@ -53,7 +53,7 @@
             }
           },
           "specs": [
-            { "label": "Kích thước", "value": "25 x 25 x 30 cm" },
+            { "label": "Kích thước", "value": "162 x 163 x 205 mm" },
             { "label": "Chất liệu", "value": "Nhựa PETG" },
             { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
           ],
@@ -90,7 +90,7 @@
             }
           },
           "specs": [
-            { "label": "Kích thước", "value": "25 x 25 x 30 cm" },
+            { "label": "Kích thước", "value": "165 x 185 x 260 cm" },
             { "label": "Chất liệu", "value": "Nhựa PETG" },
             { "label": "Nguồn điện", "value": "Cổng USB 5V (Tiết kiệm)" }
           ],
